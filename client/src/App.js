@@ -24,12 +24,21 @@ function App() {
       .catch(console.error);
   };
 
-  // Toggle todo completion status
-  const toggleTodo = (id) => {
-    axios.put(`http://localhost:5000/api/todos/${id}`)
-      .then((res) => setTodos(todos.map(todo => todo.id === id ? res.data : todo)))
-      .catch(console.error);
-  };
+// Toggle completion status of a todo
+const toggleTodo = (id) => {
+  // Find the current todo
+  const todo = todos.find((t) => t.id === id);
+  if (!todo) return;
+
+  // Send PUT request with updated 'completed' status
+  axios.put(`http://localhost:5000/api/todos/${id}`, { completed: !todo.completed })
+    .then((res) => 
+      setTodos(todos.map(t => t.id === id ? res.data : t)) // update state
+    )
+    .catch(console.error);
+};
+
+
 
   // Delete a todo
   const deleteTodo = (id) => {

@@ -70,7 +70,7 @@ A simple To-Do application built with **React** for the front-end and **Node.js 
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-link>
+git clone <https://github.com/Rawan-Abdellatif/React-with-Node.js-Assignment.git>
 cd simple-todo-app
 ```
 
@@ -95,14 +95,33 @@ npm start
 The React app will run on `http://localhost:3000`.
 
 ---
+## Structre 
+simple-todo-app/
+│
+├── client/                  # React front-end
+│   ├── public/              # Public files (index.html, favicon, etc.)
+│   ├── src/
+│   │   ├── components/      # React components
+│   │   │   
+│   │   │   ├── TodoList.js  # Displays the list of to-do items
+│   │   │   ├── TodoItem.js  # Represents a single to-do item
+│   │   │   └── AddTodo.js   # Form to add a new to-do item
+│   │   ├── index.js         # Entry point for React
+|   |   |── App.js           # Main component that manages state
+│   │   └── App.css          # Styling for the React app
+│   ├── package.json
+│   └── README.md
+│
+├── server/                  # Node.js back-end
+│   |
+│   ├── index.js        # Main server file
+│   ├── package.json
+│   └── README.md
+│
+├── .gitignore
+└── README.md                # Main README with instructions
 
-## Usage
 
-1. Open the application in your browser (`http://localhost:3000`).
-2. Add new to-do items using the form.
-3. Mark items as completed by clicking the checkbox.
-4. Delete items using the delete button.
-5. All changes are reflected immediately and synced with the back-end.
 
 ---
 
@@ -110,27 +129,9 @@ The React app will run on `http://localhost:3000`.
 
 * Front-End: React, CSS, Axios
 * Back-End: Node.js, Express
-* Middleware: CORS, JSON body parsing
 
 ---
 
-## Evaluation Criteria Coverage
-
-* **Functionality**: Full CRUD operations on to-do items.
-* **Code Quality**: Well-structured, readable, and modular components.
-* **UI/UX**: Clean, intuitive, and responsive interface.
-* **API Integration**: Proper API calls with error handling and data synchronization.
-* **Documentation**: Clear instructions for setup and usage.
-
----
-
-## Bonus Features 
-
-* Edit existing to-do items.
-* Add due dates or priority labels.
-* Deployment on hosting platforms like Vercel or Heroku.
-
----
 
 
 
