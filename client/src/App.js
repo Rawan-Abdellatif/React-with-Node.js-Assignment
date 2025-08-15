@@ -1,63 +1,115 @@
-// client/src/App.js
-import React, { useEffect, useState } from "react";
+// Import React hooks and necessary libraries/components
+import { useEffect, useState } from "react";
 import axios from "axios";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import "./App.css";
+import logo from "./logo.png";
 
 function App() {
+  // State to store list of todos
   const [todos, setTodos] = useState([]);
 
+  // Fetch todos from backend when component mounts
   useEffect(() => {
     axios.get("http://localhost:5000/api/todos")
       .then((res) => setTodos(res.data))
-      .catch(console.error);
+      .catch(console.error); // Log errors if any
   }, []);
 
+  // Add a new todo
   const addTodo = (text) => {
     axios.post("http://localhost:5000/api/todos", { text })
       .then((res) => setTodos([...todos, res.data]))
       .catch(console.error);
   };
 
+  // Toggle todo completion status
   const toggleTodo = (id) => {
     axios.put(`http://localhost:5000/api/todos/${id}`)
       .then((res) => setTodos(todos.map(todo => todo.id === id ? res.data : todo)))
       .catch(console.error);
   };
 
+  // Delete a todo
   const deleteTodo = (id) => {
     axios.delete(`http://localhost:5000/api/todos/${id}`)
       .then(() => setTodos(todos.filter(todo => todo.id !== id)))
       .catch(console.error);
   };
 
+  // Edit a todo's text and due date
+  const editTodo = (id, newText, dueDate) => {
+    const existing = todos.find(todo => todo.id === id);
+    if (!existing) return;
+
+    const oldText = (existing.text || "").trim();
+    const newTextTrimmed = (newText || "").trim();
+
+    // Normalize old due date
+    let oldDueDateFormatted = "";
+    if (existing.dueDate) {
+      oldDueDateFormatted = new Date(existing.dueDate).toISOString().split("T")[0];
+    }
+
+    // Normalize new due date (keep old if none provided)
+    let newDueDateFormatted = "";
+    if (dueDate) {
+      newDueDateFormatted = new Date(dueDate).toISOString().split("T")[0];
+    } else {
+      newDueDateFormatted = oldDueDateFormatted;
+    }
+
+    const textSame = oldText === newTextTrimmed;
+    const dateSame = oldDueDateFormatted === newDueDateFormatted;
+
+    if (textSame && dateSame) {
+      alert("There are no changes");
+      return;
+    }
+
+    // Update todo in backend and state
+    axios.put(`http://localhost:5000/api/todos/${id}`, {
+      text: newTextTrimmed,
+      dueDate: newDueDateFormatted || null
+    })
+      .then((res) => setTodos(todos.map(todo => todo.id === id ? res.data : todo)))
+      .catch(console.error);
+  };
+
   return (
-    <div className="App">
-      {/* Logo  */}
-      {/* <img 
-        src="/logo192.png" 
-        alt="App Logo" 
-        style={{ width: "60px", margin: "10px auto", display: "block" }} 
-      /> */}
+    <>
+      <div className="App">
+        {/* Logo */}
+        <img 
+          src={logo}
+          alt="App Logo"
+          style={{ margin: "10px auto", display: "block", borderRadius:"55%", width: "120px" }}
+        />
 
-      {/* Title */}
-      <h1>Simple To-Do App</h1>
-      <h2 style={{ color: "#555", marginBottom: "1rem" }}>
-       
-      </h2>
+        {/* App Title */}
+        <h1>Simple To-Do App</h1>
+        <h2 style={{ color: "#555", marginBottom: "1rem" }}>
+          {/* Subtitle can go here */}
+        </h2>
 
-      {/* Add Task Section */}
-      <AddTodo onAdd={addTodo} />
+        {/* Section to add new task */}
+        <AddTodo onAdd={addTodo} />
 
-      {/* Todo List */}
-      <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
+        {/* List of todos */}
+        <TodoList
+          todos={todos}
+          onToggle={toggleTodo}
+          onDelete={deleteTodo}
+          onEdit={editTodo}
+        />
 
-      {/* Footer */}
-       <footer style={{ marginTop: "2rem", textAlign: "center", color: "gray", fontStyle: "italic" }}>
-        © {new Date().getFullYear()} Created by Rawan Abdellatif
-      </footer>
-    </div>
+        {/* Footer */}
+        <footer style={{ marginTop: "2rem", textAlign: "center", color: "gray", fontStyle: "italic" }}>
+          © {new Date().getFullYear()} Created by Rawan Abdellatif
+        </footer>
+      </div>
+    </>
   );
 }
 
