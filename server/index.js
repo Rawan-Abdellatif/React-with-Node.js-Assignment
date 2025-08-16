@@ -4,6 +4,7 @@ const app = express();
 const PORT = 5000;
 const cors = require("cors");
 const path = require("path"); 
+const fs = require('fs');
 
 // Make 'public' folder accessible in browser
 app.use(express.static('public'));
