@@ -1,6 +1,3 @@
-# React-with-Node.js-Assignment
-
-
 # Simple To-Do Application
 
 A simple To-Do application built with **React** for the front-end and **Node.js with Express** for the back-end. This project allows users to add, view, complete, and delete to-do items, demonstrating key concepts in React and Node.js development.
