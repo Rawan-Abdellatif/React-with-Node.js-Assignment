@@ -66,13 +66,17 @@ app.delete("/api/todos/:id", (req, res) => {
 });
 
 // Serve React build in production
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
 
 
+const buildPath = path.join(__dirname, "../client/build");
+if (fs.existsSync(buildPath)) {
+  app.use(express.static(buildPath));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(buildPath, "index.html"));
+  });
+} else {
+  console.warn("React build folder not found. Front-end not served.");
+}
 
 
 // Start server
