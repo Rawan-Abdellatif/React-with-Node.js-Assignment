@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const PORT = 5000;
 const cors = require("cors");
-const path = require("path"); // Needed to serve React build in production
+const path = require("path"); 
 
 // Make 'public' folder accessible in browser
 app.use(express.static('public'));
@@ -66,12 +66,14 @@ app.delete("/api/todos/:id", (req, res) => {
 });
 
 // Serve React build in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build"))); // Serve static files
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build", "index.html")); // Serve React index.html
-  });
-}
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
+
+
 
 // Start server
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
