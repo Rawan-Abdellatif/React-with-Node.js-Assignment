@@ -94,6 +94,9 @@ The React app will run on `http://localhost:3000`.
 ---
 ## Structure 
 
+## Structure
+
+```text
 simple-todo-app/
 │
 ├── client/                  # React front-end
