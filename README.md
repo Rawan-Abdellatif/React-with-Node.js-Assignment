@@ -96,26 +96,24 @@ The React app will run on `http://localhost:3000`.
 
 
 
-## Structre 
+## Structure 
 simple-todo-app/
 │
 ├── client/                  # React front-end
 │   ├── public/              # Public files (index.html, favicon, etc.)
 │   ├── src/
 │   │   ├── components/      # React components
-│   │   │   
 │   │   │   ├── TodoList.js  # Displays the list of to-do items
 │   │   │   ├── TodoItem.js  # Represents a single to-do item
 │   │   │   └── AddTodo.js   # Form to add a new to-do item
+│   │   ├── App.js           # Main component that manages state
 │   │   ├── index.js         # Entry point for React
-|   |   |── App.js           # Main component that manages state
 │   │   └── App.css          # Styling for the React app
 │   ├── package.json
 │   └── README.md
 │
 ├── server/                  # Node.js back-end
-│   |
-│   ├── index.js        # Main server file
+│   ├── index.js             # Main server file
 │   ├── package.json
 │   └── README.md
 │
