@@ -94,7 +94,6 @@ The React app will run on `http://localhost:3000`.
 ---
 ## Structure 
 
-## Structure
 
 ```text
 simple-todo-app/
@@ -119,8 +118,8 @@ simple-todo-app/
 │
 ├── .gitignore
 └── README.md                # Main README with instructions
-
----
+------------------
+```
 
 ## Technologies Used
 
