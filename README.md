@@ -92,11 +92,8 @@ npm start
 The React app will run on `http://localhost:3000`.
 
 ---
-
-
-
-
 ## Structure 
+
 simple-todo-app/
 │
 ├── client/                  # React front-end
@@ -119,8 +116,6 @@ simple-todo-app/
 │
 ├── .gitignore
 └── README.md                # Main README with instructions
-
-
 
 ---
 
